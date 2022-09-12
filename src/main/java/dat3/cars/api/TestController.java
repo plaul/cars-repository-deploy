@@ -13,9 +13,20 @@ public class TestController {
   @Value("${app.secret-msg}")
   private String msg;
 
+  @Value("${spring.datasource.url}")
+  String url;
+
+
+  @Value("${spring.datasource.username}")
+  String user;
+
+  @Value("${spring.datasource.password}")
+  String pw;
+
+
   @GetMapping
   public String getMsg(){
-    return "["+msg+"]";
+    return "["+msg+" : " +url +" : "+ user +" : " +pw +  "]";
   }
 
 }
