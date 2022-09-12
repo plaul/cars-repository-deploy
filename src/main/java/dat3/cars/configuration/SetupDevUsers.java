@@ -8,6 +8,7 @@ import dat3.cars.service.ReservationService;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import dat3.security.repository.UserWithRolesRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class SetupDevUsers implements ApplicationRunner {
 
   String passwordUsedByAll;
 
+  @Value("${app.secret-msg}")
+  private String msg;
+
   public SetupDevUsers(UserWithRolesRepository userWithRolesRepository,
                        MemberRepository memberRepository,
                        CarRepository carRepository,
@@ -38,6 +42,10 @@ public class SetupDevUsers implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) {
+
+    for(int i= 0; i <100; i++){
+      System.out.println(msg);
+    }
     Member m1 = new Member("member1", passwordUsedByAll, "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lynbby", "2800");
     memberRepository.save(m1);
 
