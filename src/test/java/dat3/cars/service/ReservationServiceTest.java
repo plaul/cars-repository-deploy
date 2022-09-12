@@ -8,6 +8,7 @@ import dat3.cars.repository.MemberRepository;
 import dat3.cars.repository.ReservationRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,13 @@ class ReservationServiceTest {
     //Reserve the Car
     reservationRepository.save(new Reservation(m1,volvo, LocalDate.of(2022,5,5)));
   }
+
+@AfterAll
+static void cleanUp(@Autowired ReservationRepository reservationRepository, @Autowired CarRepository carRepository, @Autowired MemberRepository memberRepository){
+ reservationRepository.deleteAll();
+    memberRepository.deleteAll();
+    carRepository.deleteAll();
+}
 
   @BeforeEach
   void setupReservationService(){
